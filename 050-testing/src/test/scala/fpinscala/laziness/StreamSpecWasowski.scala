@@ -51,7 +51,7 @@ class StreamSpecWasowski extends FreeSpec with Matchers with PropertyChecks {
     // two property tests:
 
     "returns the head of a singleton stream packaged in Some (02)" in {
-      forAll { (n :Int) => cons (n, Stream.empty).headOption == Some (n) }
+      forAll { (n :Int) => cons (n, Stream.empty).headOption should be (Some (n)) }
     }
 
     "returns the head of random stream packaged in Some (02)" in {
@@ -60,7 +60,7 @@ class StreamSpecWasowski extends FreeSpec with Matchers with PropertyChecks {
 
       // This property uses our generator of non empty streams thanks to the
       // above implicit declaration
-      forAll { (s :Stream[Int]) => s.headOption != None }
+      forAll { (s :Stream[Int]) => s.headOption shouldNot be (None) }
     }
 
   }

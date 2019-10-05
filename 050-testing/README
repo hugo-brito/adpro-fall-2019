@@ -56,6 +56,8 @@ another testing framework, etc.) More details on the format below.
 
 4. What properties to test?
 
+(below n and m are assumed to be non-negative)
+
 For headOption:
 - it should return None on an empty stream;  (already included in
   the examples)

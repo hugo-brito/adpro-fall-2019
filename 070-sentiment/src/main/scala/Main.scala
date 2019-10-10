@@ -7,11 +7,16 @@ import org.apache.spark.sql.Dataset
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
 
+// This
+// (https://stackoverflow.com/questions/40015416/spark-unable-to-load-native-hadoop-library-for-your-platform)
+// actually does seems to work, to eliminate the missing hadoop message.
+// 'WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable'
+// AW not sure if the 'hadoop missing warning' matters though.
 
 object Main {
 
-	type Embedding       = (String, List[Double])
-	type ParsedReview    = (Integer, String, Double)
+	type Embedding = (String, List[Double])
+	type ParsedReview = (Integer, String, Double)
 
 	org.apache.log4j.Logger getLogger "org"  setLevel (org.apache.log4j.Level.WARN)
 	org.apache.log4j.Logger getLogger "akka" setLevel (org.apache.log4j.Level.WARN)
@@ -20,6 +25,8 @@ object Main {
 		.master  ("local[5]")
 		.getOrCreate
 
+	spark.conf.set("spark.executor.memory", "4g")
+
   import spark.implicits._
 
 	val reviewSchema = StructType(Array(
@@ -27,7 +34,7 @@ object Main {
 			StructField ("overall",    DoubleType, nullable=false),
 			StructField ("summary",    StringType, nullable=false)))
 
-	// Read file and merge the text abd summary into a single text column
+	// Read file and merge the text and summary into a single text column
 
 	def loadReviews (path: String): Dataset[ParsedReview] =
 		spark
@@ -36,7 +43,8 @@ object Main {
 			.json (path)
 			.rdd
 			.zipWithUniqueId
-			.map[(Integer,String,Double)] { case (row,id) => (id.toInt, s"${row getString 2} ${row getString 0}", row getDouble 1) }
+			.map[(Integer,String,Double)] { case (row,id) =>
+          (id.toInt, s"${row getString 2} ${row getString 0}", row getDouble 1) }
 			.toDS
 			.withColumnRenamed ("_1", "id" )
 			.withColumnRenamed ("_2", "text")
@@ -57,8 +65,10 @@ object Main {
 
   def main(args: Array[String]) = {
 
-    val glove  = loadGlove ("path/to/glove/file") // FIXME: change here to downloaded files
-    val reviews = loadReviews ("path/to/amazon/reviews/file") // FIXME: change here to downloaded files
+    val DATA_PATH = "/data/"
+
+    val glove  = loadGlove (s"${DATA_PATH}/glove.6B.50d.txt")
+    val reviews = loadReviews (s"${DATA_PATH}/reviews_small_1.json")
 
     // replace the following with the project code
     glove.show
@@ -94,16 +104,15 @@ object Main {
     //      - follow the MultilayerPerceptronClassifier tutorial.
     //      - Remember that the first layer needs to be #50 (for vectors of size
     //      50), and the last needs to be #3.
-    // Validate the perceptron here
-    //
-    //  - Either implement your own validation loop  or use
-	  //    import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+    //  - Validate the perceptron
+    //      - Either implement your own validation loop  or use
+	  //        org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
     //
     // Any suggestions of improvement to the above guide are welcomed by
     // teachers.
     //
-    // This is an open programming exercise, you do not need to follow this
-    // guide.
+    // This is an open programming exercise, you do not need to follow the above
+    // guide to complete it.
 
 		spark.stop
   }

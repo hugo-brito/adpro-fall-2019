@@ -1,0 +1,26 @@
+There are three exam sets:
+
+1. Exam 2018 Autumn is in src/main/scala/exam2018autumn.scala . This was the first time
+   when the entire exam text has been placed inside the .scala file.
+   The same format will be used in 2019.
+
+2. exam2018.scala.pdf from 2018 spring (along with the corresponding
+   exam2018.scala file and, spoiler alert, exam2018solutions.scala file).
+
+
+3. exam2017.scala.pdf from 2017 (along with the corresponding exam2017.scala
+   file and, spoiler alert, exam2017solutions.scala file).
+
+4. exam2016.scala.pdf from 2016 (along with the corresponding exam2016.scala
+   file and, spoiler alert, exam2016solutions.scala file).
+
+5. src/main/scala/examFake.scala (along with the corresponding solutions).
+   This is a trial exam prepared in 2016.  It has the same scope and size as an
+   actual exam. This one was never typeset in the PDF file, but all the questions
+   are in comments in the scala file (like in Autumn 2018).
+
+The build.sbt file and the library implementation files for these exams.
+
+The solutions are always a bit sketchy, sometimes even imperfect, mostly
+created to assess feasibility.  Contact teachers via forums if in doubt.
+Extremely many other solutions are often possible.

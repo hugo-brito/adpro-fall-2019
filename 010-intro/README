@@ -1,0 +1,30 @@
+Installing SBT: http://www.scala-sbt.org/release/docs/Setup.html
+
+Call the following sbt commands to tinker with this project:
+
+sbt compile      - to build the project
+sbt console      - to drop into REPL with a suitable classpath setup for your project
+sbt clean        - remove sbt generated files
+sbt run          - run the main method if you have such (for instance via App)
+
+After the console command, the REPL is loaded with a suitably setup CLASSPATH.
+So you can for example do:
+
+> import adpro.Exercise85_TestCases._
+
+The REPL will find all the class files (with sbt we shall almost always
+compile our scala files, and load the objects into the REPL from class files.
+Then we can use the REPL to interact with them and debug stuff.)
+
+The following two targets are useful in testing:
+
+sbt test         - to run the scalacheck tests
+sbt test:console - drop into REPL with classpath configured for testing classes
+
+IntelliJ people will find out that IntelliJ can somehow import the build.sbt
+file to offer the same services (and perhaps they already used them
+implicitly).  I do not know about Eclipse unfortunately.  In any case, you are
+on your own if you are not calling sbt directly :).
+
+You will find the source files in src/main/scala/* in sbt managed projects. The
+test files are in src/test/scala/*.

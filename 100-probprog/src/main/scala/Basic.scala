@@ -57,12 +57,15 @@ object BasicProbability {
   case object Girl extends Child
 
   val S = for {
-    f <- Uniform(Boy,Girl)
-    s <- Uniform(Boy,Girl)
+    f <- Uniform(Boy,Girl) // first child
+    s <- Uniform(Boy,Girl) // second child
   } yield (f,s)
 
-  val E = S map { case (Boy,Boy) => true; case _ => false }
-  val F = S map { case (f,s) => f == Boy || s == Boy }
+  // the same as:
+  // val S = ^^(Uniform(Boy,Girl), Uniform(Boy,Girl))
+
+  val E: Element[Boolean] = S map { case (Boy,Boy) => true; case _ => false }
+  val F: Element[Boolean] = S map { case (f,s) => f == Boy || s == Boy }
 
   // Importance.probability (E, true)
   // Importance.probability (F, true)
@@ -71,11 +74,13 @@ object BasicProbability {
 
   // Example with Balls
 
-  val boxA = Flip (.5) //  true if box A, otherwise box B
+  val boxA: Element[Boolean] = Flip (.5) // Uniform (true, false)
+  // true if box A, otherwise box B
 
-  val balls = for {
+  val balls: Element[Boolean] = for { // true if gree
       box <- boxA
-      ball <- if (box) Flip (2.0/9)  else Flip (4.0/7) // true if green
+      ball <- if (box) Flip (2.0/9)  else Flip (4.0/7)
+      // true if green
     } yield (ball)
 
   balls.observe (false)
@@ -83,10 +88,11 @@ object BasicProbability {
   // Importance.probability (boxA,true)
   //
   // Expectation
+  // res1: Double = 0.6473000000000004
 
   val X = Uniform (1,2,3,4,5,6)
 
-  // scala> VariableElimination (X)
+  // scala> 
   // res1: com.cra.figaro.algorithm.factored.ProbQueryVariableElimination = com.cra.figaro.algorithm.factored.ProbQ
   // ueryVariableElimination@6000e77f
   //

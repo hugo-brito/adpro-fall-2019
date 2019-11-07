@@ -63,6 +63,7 @@ object BasicProbability {
 
   // the same as:
   // val S = ^^(Uniform(Boy,Girl), Uniform(Boy,Girl))
+  // Means: give me an uniformely distributed pair
 
   val E: Element[Boolean] = S map { case (Boy,Boy) => true; case _ => false }
   val F: Element[Boolean] = S map { case (f,s) => f == Boy || s == Boy }

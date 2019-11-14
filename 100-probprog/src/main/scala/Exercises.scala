@@ -1,14 +1,18 @@
 // Advanced Programming, Andrzej Wasowski
 // Probabilistic Programming (AKA Probability is also a monad)
 
-// Group number: _____
+// Group number: 25
 //
-// AUTHOR1: __________
-// TIME1: _____ <- how much time have you used on solving this exercise set
+// AUTHOR1: Hugo Brito
+// TIME1: 6 <- how much time have you used on solving this exercise set
 // (excluding reading the book, fetching pizza, and going out for a smoke)
 //
-// AUTHOR2: __________
-// TIME2: _____ <- how much time have you used on solving this exercise set
+// AUTHOR2: André Kobæk
+// TIME2: 5 <- how much time have you used on solving this exercise set
+// (excluding reading the book, fetching pizza, and going out for a smoke)
+//
+// AUTHOR2: Jonas Andersen
+// TIME2: 5 <- how much time have you used on solving this exercise set
 // (excluding reading the book, fetching pizza, and going out for a smoke)
 //
 // You should work with the file by following the associated exercise sheet
@@ -76,7 +80,7 @@ object Exercises {
   // The number of balls, including exactly 1 red ball, found in the run at the
   // begining of the game
 
-  val BallsNo: Int = 8
+  val BallsNo: Int = 5
 
   // Exercise 1.
   //
@@ -89,8 +93,12 @@ object Exercises {
   //
   // Flip (probability: Double): Element[Boolean]
 
-  def pick (n: Int): Element[Boolean] = ???
+  def pick (n: Int): Element[Boolean] = Flip(1.0/(n+1.0))
 
+  // Flip(0.7) is an Element[Boolean] that represents the probabilistic
+  // model that produces true with probability 0.7 and false
+  // with probability 0.3.
+      
   // Exercise 2.
   //
   // Write a function 'move' that given the initial player and the number of
@@ -104,7 +112,11 @@ object Exercises {
   // This constructor returns a distribution where the value 'a' has probability
   // '1'.
 
-  def move (player: Player, n: Int): Element[Player] = ???
+  def move (player: Player, n: Int): Element[Player] = 
+    n match {
+      case 0 => Constant (player) 
+      case n => If (pick(n), Constant (player), move (next (player), (n-1)))
+    }
 
   // Exercise 3.
   //
@@ -120,14 +132,22 @@ object Exercises {
   // Importance.probability[A] (distribution: Element[A], value: A): Double
 
   // Probability that Paula wins given Paula starts (the total no of balls: BallsNo)
-  def probPaula: Double = ???
+  def probPaula: Double = Importance.probability (move(Paula, BallsNo-1), Paula)
+  // scala> probPaula
+  // res0: Double = 0.5027000000000204
 
   // Probability that Paula wins given Peter starts (the total no of balls: BallsNo)
-  def probPeter: Double = ???
+  def probPeter: Double = 1 - probPaula
+  // scala> probPeter
+  // res1: Double = 0.49479999999997837
 
   // Which strategy is beter for Paula? What if BallsNo == 9?
-  //
-  // Write your answer here in a comment: ___
+  // scala> probPaula
+  // res0: Double = 0.5618000000000182
+  // scala> probPeter
+  // res1: Double = 0.450899999999983
+  // Write your answer here in a comment: If BallsNo == 9 then it's advantageous for
+  // Paula to start first. If BallsNo == 8 the probability is roughly even.
 
 
   // Exercise 4.
@@ -143,6 +163,10 @@ object Exercises {
   // You do not need to write the answer to this question for grading.
   // Use it yourself to appreciate the power of the probabilistic programming
   // tool).
+  //
+  // The conclusion for this exercise is that, on pen and pencil, it would
+  // take a lot of time to expand the probability nodes, calculate them in order
+  // to reason about them. For a tree originated from 10 balls
 
 
 
@@ -163,12 +187,16 @@ object Exercises {
   // randomly using 'firstMover' and then returns the probability distribution
   // for a game played with BallsNo balls in the urn:
 
-  def gameResult: Element[Player] = ???
-
+  def gameResult: Element[Player] = for {
+    p <- firstMover
+    w <- move(p, BallsNo - 1)
+  } yield w
+  
   // What is the probability that Paula wins with this uniform prior? Does it
   // agree with your intuition?
-  //
-  // _____
+  def probPaulaWins = Importance.probability (gameResult, Paula)
+  // scala> probPaulaWins
+  // res0: Double = 0.49790000000001733
 
   // Now we are going to make the observation that Paula wins. Use the observe
   // function on the gameResult.  See documentation:
@@ -188,14 +216,23 @@ object Exercises {
   // performed under the condition that Paula has won.
 
   // Compute the probability that Paula has started
-  def probPaulaStarted: Double = ???
-
+  // def probPaulaStarted: Double = Importance.probability (gameResult, Paula)
+  def probPaulaStarted: Double = VariableElimination.probability (gameResult, Paula)
+  
   // Does this probability depend on the number of balls in the urn in the
   // urn being even or odd? What if it is even? What if it is odd?
-  //
-  // ____
+  // 
+  // The probability that she started given that she won (with 8 balls in the
+  // urn) is 
+  // scala> probPaulaStarted
+  // res0: Double = 0.5
 
+  // The probability that she started given that she won (with 5 balls in the
+  // urn) is 
+  // scala> probPaulaStarted
+  // res0: Double = 0.52
 
+  // So it does depend if the number of balls is odd or even.
 
   // Exercise 6.
   //
@@ -224,11 +261,13 @@ object Exercises {
   // equally like values of A as its variable size argument list):
   //
   // Uniform[A] (a : A*) :Element[A]
-  //
-  // The argument list can be generated using List.tabulate[A].
 
-  lazy val blackBallsNo: Element[Int] = ???
+  // lazy val blackBallsNo: Element[Int] = Uniform(List.fill(UpperBound-1)(0) : _*)
 
+  lazy val blackBallsNo: Element[Int] = Uniform(List.range(0,UpperBound): _*)
+  //                                                                    ^^^^^
+  // this gives the elements of the list as argument instead of the whole list
+  
   // Now convert the prior distribution on the initial number of black balls in
   // the urn, into a distribution over the winning player.  Since the game is
   // entirely symmetric, we can assume that Paula is starting (the result for
@@ -236,9 +275,22 @@ object Exercises {
   //
   // There is no test for this step of the computation.
 
-  def outcome: Element[Player] = ???
+  def outcome: Element[Player] = for {
+    nb <- blackBallsNo
+    p  <- firstMover
+    w  <- move(p, nb) 
+  } yield w
 
-  // Uncomment the following to assert that the chances of winning by Paul and
+  def probPaulaWinsRandomBalls: Double = VariableElimination.probability (outcome, Paula)
+  // scala> probPaulaWinsRandomBalls
+  // res0: Double = 0.5000000000000001
+
+
+  def probPeterWinsRandomBalls: Double = VariableElimination.probability (outcome, Peter)
+  // scala> probPeterWinsRandomBalls
+  // res1: Double = 0.5
+
+  // Uncomment the following to assert that the chances of winning by Paula and
   // Peter are equal
 
   // outcome observe (Paula)
@@ -259,17 +311,17 @@ object Exercises {
   //
   // This version returns the probability that the predicate p holds on the
   // values generated with 'distribution'.
-
-  lazy val posteriorOdd: Double = ???
+  def p(n: Int) : Boolean = {n%2 == 1}
+  lazy val posteriorOdd: Double = VariableElimination.probability (blackBallsNo, p : Int => Boolean) 
 
   // Is the posteriorOdd greater than 1/2?
-
+  // We get it at exactly 1/2.
 
   // Reflect whether the above estimation would take you more time analytically
   // or with a probabilistic programming library?
 
+  // If you get used to using a probabilistic programming library it will definitly be quicker, 
+  // as all computations you carry out, will be done for you, and you still have to think
+  // about the model you made. So not much can really be gained from an analytical approach.
+
 }
-
-
-
-

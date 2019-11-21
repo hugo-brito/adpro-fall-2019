@@ -22,114 +22,119 @@ import scalaz.scalacheck.ScalazArbitrary._
 
 import adpro.Lenses._
 
+import org.scalatest._
+import Matchers._
+
+
+//class LensesSpec extends FlatSpec with Checkers {
+
+  class LensesSpec extends FlatSpec with Checkers {
+
+    // Exercise 1.
+    // Write the laws polymorphically for *any* total lens and instantiate it for
+    // concrete lenses.
+
+
+    def PutGet[C, A](l: Lens[C, A])(implicit aA: Arbitrary[A], aC: Arbitrary[C]):Prop =
+    //below is a dumb property you can start with
+   forAll((n: Int) => n + 0 == n)
 
 
 
-class LensesSpec extends FlatSpec with Checkers {
 
-  // Exercise 1.
-  // Write the laws polymorphically for *any* total lens and instantiate it for
-  // concrete lenses.
+    // def GetPut[C,A] ... TODO
 
-  def PutGet[C,A] (l: Lens[C,A])
-    (implicit aA: Arbitrary[A], aC: Arbitrary[C]) :Prop = ???
+    // def PutPut[C,A] ... TODO
 
-  // def GetPut[C,A] ... TODO
+    // specification of a total lense laws (refers to the laws above)
+    // def wellBehavedTotalLense[A,C] (l: Lens[C,A])
+    //   (implicit ac: Arbitrary[C], aa: Arbitrary[A]) = {
+    //   it should "obey the PutGet law" in check { PutGet (l) }
+    //   it should "obey the GetPut law" in check { GetPut (l) }
+    // }
 
-  // def PutPut[C,A] ... TODO
+    // def veryWellBehavedTotalLense[A,C] (l: Lens[C,A])
+    //   (implicit aC: Arbitrary[C], aA: Arbitrary[A]) = {
+    //     it should behave like wellBehavedTotalLense (l)
+    //     it should "obey the PutPut law" in check { PutPut (l) }
+    // }
+    //
+    // Calling above tests for l1 l2 and l3 (just uncomment and run)
 
-  // specification of a total lense laws (refers to the laws above)
-  // def wellBehavedTotalLense[A,C] (l: Lens[C,A])
-  //   (implicit ac: Arbitrary[C], aa: Arbitrary[A]) = {
-  //   it should "obey the PutGet law" in check { PutGet (l) }
-  //   it should "obey the GetPut law" in check { GetPut (l) }
-  // }
+    // "l1" should behave like wellBehavedTotalLense (l1) // will fail GetPut see p. 6
+    // "l2" should behave like wellBehavedTotalLense (l2) // will fail PutGet see p. 6
+    // "l3" should behave like wellBehavedTotalLense (l3)
+    // // it should behave like veryWellBehavedTotalLense (l3)
 
-  // def veryWellBehavedTotalLense[A,C] (l: Lens[C,A])
-  //   (implicit aC: Arbitrary[C], aA: Arbitrary[A]) = {
-  //     it should behave like wellBehavedTotalLense (l)
-  //     it should "obey the PutPut law" in check { PutPut (l) }
-  // }
-  //
-  // Calling above tests for l1 l2 and l3 (just uncomment and run)
+    // The four codiag lines ufnortunately do not work with scalacheck 0.14
+    // scalatest 3.0.5 and monocole 1.5 + scala 2.12.4.  It appears that this is
+    // due to compilation against various versions of prior components (it
+    // produces a JVM linking error).  We need to wait until they recompile all
+    // the libraries correctly.
 
-  // "l1" should behave like wellBehavedTotalLense (l1) // will fail GetPut see p. 6
-  // "l2" should behave like wellBehavedTotalLense (l2) // will fail PutGet see p. 6
-  // "l3" should behave like wellBehavedTotalLense (l3)
-  // // it should behave like veryWellBehavedTotalLense (l3)
-
-  // The four codiag lines ufnortunately do not work with scalacheck 0.14
-  // scalatest 3.0.5 and monocole 1.5 + scala 2.12.4.  It appears that this is
-  // due to compilation against various versions of prior components (it
-  // produces a JVM linking error).  We need to wait until they recompile all
-  // the libraries correctly.
-
-  // "codiag[Int]" should behave like veryWellBehavedTotalLense (codiag[Int])
-  // "codiag[String]" should behave like veryWellBehavedTotalLense (codiag[String])
-  // "codiag1[Int]" should behave like veryWellBehavedTotalLense (codiag1[Int])
-  // "codiag1[String]" should behave like veryWellBehavedTotalLense (codiag1[String])
+    // "codiag[Int]" should behave like veryWellBehavedTotalLense (codiag[Int])
+    // "codiag[String]" should behave like veryWellBehavedTotalLense (codiag[String])
+    // "codiag1[Int]" should behave like veryWellBehavedTotalLense (codiag1[Int])
+    // "codiag1[String]" should behave like veryWellBehavedTotalLense (codiag1[String])
 
 
+    // Tests for Exercise 4 (uncomment)
 
-  // Tests for Exercise 4 (uncomment)
+    // "itu" should "show Alex at zipcode 2800" in
+    // { assertResult(itu.students("Alex").zipcode) ("2800") }
 
-  // "itu" should "show Alex at zipcode 2800" in
-  // { assertResult(itu.students("Alex").zipcode) ("2800") }
-
-  // "itu1" should "show Alex at zipcode 9100" in
-  // { assertResult(itu1.students("Alex").zipcode) ("9100") }
-
+    // "itu1" should "show Alex at zipcode 9100" in
+    // { assertResult(itu1.students("Alex").zipcode) ("9100") }
 
 
-  // Test for Exercise 5 (uncomment as needed)
+    // Test for Exercise 5 (uncomment as needed)
 
-  // "itu2" should "show Alex at zipcode 9100" in
-  // { assertResult(itu2.students("Alex").zipcode) ("9100") }
-
-
-
-  // Test for Exercise 6 (uncomment as needed)
-
-  // "itu3" should "have all the countries in upper case" in
-  // { assert (itu3.students.values.map(_.country).forall (s => s.toUpperCase == s)) }
+    // "itu2" should "show Alex at zipcode 9100" in
+    // { assertResult(itu2.students("Alex").zipcode) ("9100") }
 
 
+    // Test for Exercise 6 (uncomment as needed)
 
-  // Tests for Exercise 8 (to be completed as Exercise 9)
+    // "itu3" should "have all the countries in upper case" in
+    // { assert (itu3.students.values.map(_.country).forall (s => s.toUpperCase == s)) }
 
-  // write the laws polymorphically for *any* partial lens and instantiate it for
-  // concrete lenses.  The partial comparison is defined as \sqsubseteq by
-  // Foster et al. on page 5 (bottom).
-  //
-  // Interestingly, Optionals are only partial in the Get function, not in the
-  // Put function (have no idea why...). This simplifies laws a bit, but
-  // complicates implementations of Optionals. Consequently, the members of
-  // Optionals l are l.getOption and l.set (unlike for lenses, where these where
-  // l.get and l.set).
 
-  // def PartialPutGet[C,A] (l: Optional[C,A]) = ...
+    // Tests for Exercise 8 (to be completed as Exercise 9)
 
-  // def PartialGetPut[C,A] = ...
+    // write the laws polymorphically for *any* partial lens and instantiate it for
+    // concrete lenses.  The partial comparison is defined as \sqsubseteq by
+    // Foster et al. on page 5 (bottom).
+    //
+    // Interestingly, Optionals are only partial in the Get function, not in the
+    // Put function (have no idea why...). This simplifies laws a bit, but
+    // complicates implementations of Optionals. Consequently, the members of
+    // Optionals l are l.getOption and l.set (unlike for lenses, where these where
+    // l.get and l.set).
 
-  // def PartialPutPut[C,A] = ...
+    // def PartialPutGet[C,A] (l: Optional[C,A]) = ...
 
-  // specification of Optional laws (uncomment)
-  //
-  // def wellBehavedPartialLense[A,C] (l: Optional[C,A])
-  //   (implicit ac: Arbitrary[C], aa: Arbitrary[A]) = {
-  //   it should "obey the PartialPutGet law" in check { PartialPutGet (l) }
-  //   it should "obey the PartialGetPut law" in check { PartialGetPut (l) }
-  // }
+    // def PartialGetPut[C,A] = ...
 
-  // def veryWellBehavedPartialLense[A,C] (l: Optional[C,A])
-  //   (implicit aC: Arbitrary[C], aA: Arbitrary[A]) = {
-  //     it should behave like wellBehavedPartialLense (l)
-  //     it should "obey the PartialPutPut law" in check { PartialPutPut (l) }
-  // }
+    // def PartialPutPut[C,A] = ...
 
-  //  "setIth" should behave like veryWellBehavedPartialLense (setIth[Int](5))
-  //  "setIth1" should behave like veryWellBehavedTotalLense (setIth1[Int](5,-1)) // fails GetPut as expected
-}
+    // specification of Optional laws (uncomment)
+    //
+    // def wellBehavedPartialLense[A,C] (l: Optional[C,A])
+    //   (implicit ac: Arbitrary[C], aa: Arbitrary[A]) = {
+    //   it should "obey the PartialPutGet law" in check { PartialPutGet (l) }
+    //   it should "obey the PartialGetPut law" in check { PartialGetPut (l) }
+    // }
+
+    // def veryWellBehavedPartialLense[A,C] (l: Optional[C,A])
+    //   (implicit aC: Arbitrary[C], aA: Arbitrary[A]) = {
+    //     it should behave like wellBehavedPartialLense (l)
+    //     it should "obey the PartialPutPut law" in check { PartialPutPut (l) }
+    // }
+
+    //  "setIth" should behave like veryWellBehavedPartialLense (setIth[Int](5))
+    //  "setIth1" should behave like veryWellBehavedTotalLense (setIth1[Int](5,-1)) // fails GetPut as expected
+  }
+
 
 
 // One good thing about using Monocle (or any other ready made lens framework

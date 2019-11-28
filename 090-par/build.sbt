@@ -1,12 +1,12 @@
-import Dependencies._
+name := "par"
 
-lazy val root = (project in file(".")).
-  settings(
-    inThisBuild(List(
-      organization := "com.example",
-      scalaVersion := "2.12.6",
-      version      := "0.1.0-SNAPSHOT"
-    )),
-    name := "030-streams",
-    libraryDependencies += scalaTest % Test
-  )
+version := "0.02"
+
+scalaVersion := "2.12.9"
+
+scalacOptions += "-deprecation"
+
+scalacOptions += "-feature"
+
+libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.0" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"

@@ -35,9 +35,10 @@ import Matchers._
     // concrete lenses.
 
 
-    def PutGet[C, A](l: Lens[C, A])(implicit aA: Arbitrary[A], aC: Arbitrary[C]):Prop =
-    //below is a dumb property you can start with
-   forAll((n: Int) => n + 0 == n)
+    def PutGet[C, A](l: Lens[C, A])(implicit aA: Arbitrary[A], aC: Arbitrary[C]):Prop = 
+    forAll((n: C, s: A) => {(l.get( l.set((n)(s)) ) == n)})
+  //   //below is a dumb property you can start with
+  //  forAll((n: Int) => n + 0 == n)
 
 
 

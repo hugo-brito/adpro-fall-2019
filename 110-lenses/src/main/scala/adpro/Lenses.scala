@@ -48,13 +48,13 @@ object Lenses {
   // Exercise 0. Study the implementation of lens l1 below and compare it to the
   // first example in Foster et al. (Page 6).
 
-  val l1 = Lens[(String,Int), String] (_._1) (s1 => _ => (s1,0))
+  val l1 : Lens[(String,Int), String] = (_._1) (s1 => _ => (s1,0))
 
   // Complete the second example from page 6, and the example from page 7 below:
 
   // page 6 in Foster et al.:
 
-  // val l2 : Lens[String, (String,Int)] = TODO
+  // val l2 : Lens[String, (String,Int)] = ()
 
   // page 7 in Foster et al.
 

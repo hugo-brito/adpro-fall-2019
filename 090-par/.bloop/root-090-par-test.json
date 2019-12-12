@@ -1,0 +1,230 @@
+{
+    "version" : "1.1.2",
+    "project" : {
+        "name" : "root-090-par-test",
+        "directory" : "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par",
+        "sources" : [
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\src\\test\\scala-2.12",
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\src\\test\\scala",
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\src\\test\\java",
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\target\\scala-2.12\\src_managed\\test"
+        ],
+        "dependencies" : [
+            "root-090-par"
+        ],
+        "classpath" : [
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\.bloop\\root-090-par\\scala-2.12\\classes",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-library\\jars\\scala-library-2.12.9.jar",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalacheck\\scalacheck_2.12\\jars\\scalacheck_2.12-1.14.0.jar",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-sbt\\test-interface\\jars\\test-interface-1.0.jar",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalatest\\scalatest_2.12\\bundles\\scalatest_2.12-3.0.5.jar",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalactic\\scalactic_2.12\\bundles\\scalactic_2.12-3.0.5.jar",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\jars\\scala-reflect-2.12.9.jar",
+            "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\bundles\\scala-xml_2.12-1.0.6.jar"
+        ],
+        "out" : "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\.bloop\\root-090-par",
+        "classesDir" : "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\.bloop\\root-090-par\\scala-2.12\\test-classes",
+        "resources" : [
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\src\\test\\resources",
+            "D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par\\target\\scala-2.12\\resource_managed\\test"
+        ],
+        "scala" : {
+            "organization" : "org.scala-lang",
+            "name" : "scala-compiler",
+            "version" : "2.12.9",
+            "options" : [
+                "-deprecation",
+                "-feature",
+                "-P:semanticdb:synthetics:on",
+                "-P:semanticdb:failures:warning",
+                "-P:semanticdb:sourceroot:D:\\Users\\Hugo Brito\\Repositories\\adpro-fall-2019\\090-par",
+                "-Yrangepos",
+                "-Xplugin-require:semanticdb",
+                "-Xplugin:C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalameta\\semanticdb-scalac_2.12.9\\jars\\semanticdb-scalac_2.12.9-4.2.3.jar"
+            ],
+            "jars" : [
+                "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-compiler\\jars\\scala-compiler-2.12.9.jar",
+                "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-library\\jars\\scala-library-2.12.9.jar",
+                "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\jars\\scala-reflect-2.12.9.jar",
+                "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\bundles\\scala-xml_2.12-1.0.6.jar",
+                "C:\\Users\\Hugo Brito\\.ivy2\\cache\\jline\\jline\\jars\\jline-2.14.6.jar",
+                "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.fusesource.jansi\\jansi\\jars\\jansi-1.12.jar"
+            ],
+            "setup" : {
+                "order" : "mixed",
+                "addLibraryToBootClasspath" : true,
+                "addCompilerToClasspath" : false,
+                "addExtraJarsToClasspath" : false,
+                "manageBootClasspath" : true,
+                "filterLibraryFromClasspath" : true
+            }
+        },
+        "java" : {
+            "options" : [
+            ]
+        },
+        "test" : {
+            "frameworks" : [
+                {
+                    "names" : [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names" : [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names" : [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names" : [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names" : [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options" : {
+                "excludes" : [
+                ],
+                "arguments" : [
+                ]
+            }
+        },
+        "platform" : {
+            "name" : "jvm",
+            "config" : {
+                "home" : "C:\\Program Files\\Java\\jdk-11.0.5",
+                "options" : [
+                ]
+            },
+            "mainClass" : [
+            ]
+        },
+        "resolution" : {
+            "modules" : [
+                {
+                    "organization" : "org.scala-lang",
+                    "name" : "scala-library",
+                    "version" : "2.12.9",
+                    "artifacts" : [
+                        {
+                            "name" : "scala-library",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-library\\jars\\scala-library-2.12.9.jar"
+                        },
+                        {
+                            "name" : "scala-library",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-library\\srcs\\scala-library-2.12.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.scalacheck",
+                    "name" : "scalacheck_2.12",
+                    "version" : "1.14.0",
+                    "artifacts" : [
+                        {
+                            "name" : "scalacheck_2.12",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalacheck\\scalacheck_2.12\\jars\\scalacheck_2.12-1.14.0.jar"
+                        },
+                        {
+                            "name" : "scalacheck_2.12",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalacheck\\scalacheck_2.12\\srcs\\scalacheck_2.12-1.14.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.scala-sbt",
+                    "name" : "test-interface",
+                    "version" : "1.0",
+                    "artifacts" : [
+                        {
+                            "name" : "test-interface",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-sbt\\test-interface\\jars\\test-interface-1.0.jar"
+                        },
+                        {
+                            "name" : "test-interface",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-sbt\\test-interface\\srcs\\test-interface-1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.scalatest",
+                    "name" : "scalatest_2.12",
+                    "version" : "3.0.5",
+                    "artifacts" : [
+                        {
+                            "name" : "scalatest_2.12",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalatest\\scalatest_2.12\\bundles\\scalatest_2.12-3.0.5.jar"
+                        },
+                        {
+                            "name" : "scalatest_2.12",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalatest\\scalatest_2.12\\srcs\\scalatest_2.12-3.0.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.scalactic",
+                    "name" : "scalactic_2.12",
+                    "version" : "3.0.5",
+                    "artifacts" : [
+                        {
+                            "name" : "scalactic_2.12",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalactic\\scalactic_2.12\\bundles\\scalactic_2.12-3.0.5.jar"
+                        },
+                        {
+                            "name" : "scalactic_2.12",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scalactic\\scalactic_2.12\\srcs\\scalactic_2.12-3.0.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.scala-lang",
+                    "name" : "scala-reflect",
+                    "version" : "2.12.9",
+                    "artifacts" : [
+                        {
+                            "name" : "scala-reflect",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\jars\\scala-reflect-2.12.9.jar"
+                        },
+                        {
+                            "name" : "scala-reflect",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang\\scala-reflect\\srcs\\scala-reflect-2.12.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "org.scala-lang.modules",
+                    "name" : "scala-xml_2.12",
+                    "version" : "1.0.6",
+                    "artifacts" : [
+                        {
+                            "name" : "scala-xml_2.12",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\bundles\\scala-xml_2.12-1.0.6.jar"
+                        },
+                        {
+                            "name" : "scala-xml_2.12",
+                            "classifier" : "sources",
+                            "path" : "C:\\Users\\Hugo Brito\\.ivy2\\cache\\org.scala-lang.modules\\scala-xml_2.12\\srcs\\scala-xml_2.12-1.0.6-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -581,6 +581,8 @@ hs_err_pid*
 
 ### Metals ###
 .metals/
+.bloop/*
+.bloop
 
 ### PyCharm+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm

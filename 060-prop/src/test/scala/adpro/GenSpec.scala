@@ -90,7 +90,7 @@ class GenSpec extends FreeSpec with Matchers with PropertyChecks {
 			"val r2: List[Boolean] = Gen.boolean.toStream(42).take(5).toList" should compile
 			"val r3: List[Double] = Gen.double.toStream(42).take(5).toList" should compile
 		}
-	}
+	} 
 
 	"Exercise 1 (choose)" - {
 
